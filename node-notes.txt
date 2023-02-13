@@ -296,5 +296,69 @@ Date : 10-02-2023
 	   
 	  
 	2. Server Mode (output will be rendered in, Browser).
-	   in server mode Browser will work as client
+	   in server mode Browser will work as client.
+	  
+
+Note :: console cannot accept, Request and response
+it does not support http protocol.
+
+We know, in client and server model we have some algorithm like hand-shake algorithm, sliding window protocol,etc type of alogithm are not supported by console,hence,we need a client which can support request/response cycle, such client are, like postman, thunderBold, Browser.
+
+=> Node here will work as, Server.
+    node console will not as of client rather than a server. 
+
+(postman/thunderBold){client}
+Browser ----------------> Request ------------------> Node Server (server.js or index.js).
+                                                            |
+                                                            |
+                                                        ----------
+                                                         Response
+                                                        ----------
+                                                            |
+                                                            |
+                                                    1. to the client.
+                                                    2. to the console.
+
+    Note :: console can be used as server and client both
+    console => client => curl
+    curl stands for content url.
+
+    How to create node-server:-
+    ****************************
+    1. Request Object : handle client
+    2. Response Object : handle server.
+
+    steps to crete node server:-
+    ******************************
+    server.js : most important which intialises the server.
+    or which set-ups server.
+
+    No Application is possible without node-server file:-
+
+    step1:-
+    create const reference for http module:-
+    const http = require('http');
+
+    step2 :-
+    using http Object createServer Interface.
+
+    http.createServer((request,response)=>{
+
+    });
+
+    step3:-
+    Now set up a port where you want Your server launch.
+    Never use following
+    port => 80 => Apache
+    port => 3000 => React
+    port => 5000 => Django
+    Note :: Never use reserved Port
+
+    use other port like 👇🏻
+    8080 => by-default port.
+    7080
+    7000
+    const PORT=8080;
+
+    http.listen(PORT,)
 	
