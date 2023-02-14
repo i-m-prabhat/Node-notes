@@ -360,5 +360,63 @@ Browser ----------------> Request ------------------> Node Server (server.js or 
     7000
     const PORT=8080;
 
-    http.listen(PORT,)
+   http.listen(PORT,function()=>{
+        console.log("Server started successfully at port"+PORT);
+    });
+
+
+    How to send Json Response to the Browser :-
+    **********************************************
+    1. You should have a Array of Json Object which can be send as response to server.
+    2. set the Content-Type : application/json 
+    3. use JSON.stringify() to encode the json to string : Serialization.
+
+    Note :: Why we are using JSON.stringify, because of two reasons
+    1. response.write() only takes string input
+    2. Browser only Understand text or tag.
+
+    How to send html Response to the Browser :-
+    ************************************************** 
+    1. response.writeHead(200,{"Content-Type":"text/html"});
+    2. response.write("<h1>This is Heading</h1>");
+
+note here is  problem :-
+You cannot write lot of html code.
+You can use template string and Write the web-page code 
+and you can then pass that variable as response to write();
+
+Problem:-
+***********
+Right now we are writting all data level code and design level code in server.js 
+
+data level => model
+design level => View
+hence we must organise the data in mvc design pattern to follow modular approach.
+
+Project structure of MVC Node Application:-
+*************************************************
+Controller
+model
+View
+index.js or server,js 
+.env => configuration or Environment variable.
+.gitIgnore
+package.json
+package-lock.json
+
+This project structure is common for all, projects.
+
+controller => folder mkdir 
+model => folder mkdir
+view => folder mkdir
+index.js => js file touch
+package.json => npm init -y
+package-lock.json => npm install
+
+Note if package.json 
+**********************
+will install node_modules folder
+if any dependencies are added in package.json
+
+Note :: please make use of git bash terminal 
 	
