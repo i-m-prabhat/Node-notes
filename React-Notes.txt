@@ -205,3 +205,93 @@ function Child(){
 }
 
 export default Child;
+
+
+useContext hook
+****************
+const context = useContext(data);
+
+Example :-
+parent component
+------------------
+import react,{createContext} from "react";
+import Child from "./Child";
+
+const data = createContext();
+const data2 = createContext();
+
+function ParentComponent(){
+    const name = "Prabhat";
+    const gender = "Male";
+
+    return(
+        <>
+        <data.Provider value={name}>
+            <data2.Provider value={gender}>
+                <Child/>
+            </data2.Provider>
+        </data.Provider>
+        </>
+    )
+}
+
+export default ParentComponent;
+export {data,data2};
+
+
+child component
+-----------------
+import React from "react";
+import {data,data2} from "./ParentComponent"
+
+function Child(){
+    const name = useContext(data);
+    const gender = useContext(data2);
+
+    return(
+        <>
+            <h1>My name is {name} and gender is {gender}</h1>
+        </>
+    )
+}
+
+export default Child;
+
+
+useMemo hook
+*************
+conat variableName = useMemo(()={
+    console.log("***************");
+    return statement;
+},[state])
+
+Example:-
+import React,{useState,useMemo} from "react";
+
+function App(){
+    const [add, setAdd] = useState(0);
+    conat [minus, setMinus] = useState(100);
+
+    const multiply = useMemo(()=>{
+        console.log("***************");
+        return add*10;
+    },[add])
+
+    return(
+        <div>
+            {multiply} <br/>
+            <button onClick={()=>setAdd(add + 1)}>Addition</button>
+            <span>{add}</span> <br/>
+
+            <button onClick={()=>setMinus(minus - 1)}>Substraction</button>
+            <span>{minus}</span> <br/>
+        </div>
+    )
+}
+
+useCallback hook
+*****************
+useCallback(fn, deps) is equivalent to useMemo(() => fn, deps).
+
+Lifting State Up
+******************
