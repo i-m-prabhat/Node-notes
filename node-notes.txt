@@ -285,138 +285,216 @@ Date : 10-02-2023
 		  process.env : it is used to access Environment variable.
 		  
 		  
-		   
-		   
 	   2. Script mode or Batch Mode/shell
+	   here we want to execute bulk of lines of code we go for, script mode.
+	   what is script here :-
+	   1.likewise every Js file is a module itself.
+	   2. similarly every Js file with some line of code within is a script.
 	   
+	   p1.js 
+	   -------
+	   ....line-1
+	   ....line-2
+	   ....line-3
+	   ....line-4
+	   ....line-5
+	   ....line-6
+	   ....line-n
 	   
-	   
+	   js script => p1.js 
+	   execute 
+	   terminal cmd:/> node p1.js 
+	   node <filename.js>
 	   
 	   Note :: Terminal (shell/cmd).
 	   
-	  
-	2. Server Mode (output will be rendered in, Browser).
-	   in server mode Browser will work as client.
-	  
-
-Note :: console cannot accept, Request and response
-it does not support http protocol.
-
-We know, in client and server model we have some algorithm like hand-shake algorithm, sliding window protocol,etc type of alogithm are not supported by console,hence,we need a client which can support request/response cycle, such client are, like postman, thunderBold, Browser.
-
-=> Node here will work as, Server.
-    node console will not as of client rather than a server. 
-
-(postman/thunderBold){client}
-Browser ----------------> Request ------------------> Node Server (server.js or index.js).
-                                                            |
-                                                            |
-                                                        ----------
-                                                         Response
-                                                        ----------
-                                                            |
-                                                            |
-                                                    1. to the client.
-                                                    2. to the console.
-
-    Note :: console can be used as server and client both
-    console => client => curl
-    curl stands for content url.
-
-    How to create node-server:-
-    ****************************
-    1. Request Object : handle client
-    2. Response Object : handle server.
-
-    steps to crete node server:-
-    ******************************
-    server.js : most important which intialises the server.
-    or which set-ups server.
-
-    No Application is possible without node-server file:-
-
-    step1:-
-    create const reference for http module:-
-    const http = require('http');
-
-    step2 :-
-    using http Object createServer Interface.
-
-    http.createServer((request,response)=>{
-
-    });
-
-    step3:-
-    Now set up a port where you want Your server launch.
-    Never use following
-    port => 80 => Apache
-    port => 3000 => React
-    port => 5000 => Django
-    Note :: Never use reserved Port
-
-    use other port like 👇🏻
-    8080 => by-default port.
-    7080
-    7000
-    const PORT=8080;
-
-   http.listen(PORT,function()=>{
-        console.log("Server started successfully at port"+PORT);
-    });
-
-
-    How to send Json Response to the Browser :-
-    **********************************************
-    1. You should have a Array of Json Object which can be send as response to server.
-    2. set the Content-Type : application/json 
-    3. use JSON.stringify() to encode the json to string : Serialization.
-
-    Note :: Why we are using JSON.stringify, because of two reasons
-    1. response.write() only takes string input
-    2. Browser only Understand text or tag.
-
-    How to send html Response to the Browser :-
-    ************************************************** 
-    1. response.writeHead(200,{"Content-Type":"text/html"});
-    2. response.write("<h1>This is Heading</h1>");
-
-note here is  problem :-
-You cannot write lot of html code.
-You can use template string and Write the web-page code 
-and you can then pass that variable as response to write();
-
-Problem:-
-***********
-Right now we are writting all data level code and design level code in server.js 
-
-data level => model
-design level => View
-hence we must organise the data in mvc design pattern to follow modular approach.
-
-Project structure of MVC Node Application:-
-*************************************************
-Controller
-model
-View
-index.js or server,js 
-.env => configuration or Environment variable.
-.gitIgnore
-package.json
-package-lock.json
-
-This project structure is common for all, projects.
-
-controller => folder mkdir 
-model => folder mkdir
-view => folder mkdir
-index.js => js file touch
-package.json => npm init -y
-package-lock.json => npm install
-
-Note if package.json 
-**********************
-will install node_modules folder
-if any dependencies are added in package.json
-
-Note :: please make use of git bash terminal 
-	
+	   This script can be also, executed using npm
+	   what is npm ? it is node package manager, and used to add dependencies on the project.
+	   
+	   using npm script execution:-
+	   ****************************
+	    p1.js 
+	   *******
+	   
+		1. npm init -y
+		2. package.json => Edit => main => p1.js <----Entry Script.
+		3. scripts => key => {"start":"node p1.js"}
+		4. npm run start.
+		
+		
+	   2. Server Mode (output will be rendered in, Browser).
+	      in server mode Browser will work as client.
+	   	   
+	   Note :: console cannot accept, Request and Response.
+	   it does not support http protocal.
+	   
+	   we know, in client and server model we have some algorithm like hande-shake alogrithm,
+	   sliding window protocal, etc such type of alogrithm are not supported
+	   by console, hence, we need a client which can support request/response 
+	   cycle, such client are, like postman, thunderbold, Browser.
+	   
+	   
+	   => node here will work as, Server.
+	      node console will not as of client rather than a server.
+		  
+		  (postman/thunderbold)[client]
+		  Browser ---------> Request ---------------> Node Server (server.js or index.js).
+		                                                   ^
+		                                                   |
+														   |
+														   |
+														---------
+														 Response
+														----------
+														   |
+														   |
+												1. to the client.
+		                                        2. to the console.
+	   
+	   
+	   
+	   
+	   Note :: console can be used as server and client both
+	   console => client => curl 
+	   curl stands for content url.
+	   
+	   How to create node-server:-
+	   *******************************
+	   
+	   1. -Request Object : handle client.
+	   2. -Response Object : handle server.
+	   
+	   steps to create node server:-
+	   ****************************
+	   server.js : most important which intialises the server.
+	   or which set-ups server.
+	   
+	   No Application is possible without node-server file:-
+	   
+	   step1 :-
+	   ******
+	   create const reference for http module:-
+	   const http = require('http');	   
+	   step2 :-
+	   ******
+	   using http object createServer Interface.
+	   
+	   http.createServer((request,response)=>{
+	   
+	   
+	   });
+	   
+	   step3:- 
+	   *******
+	   Now set a port where you want your server launch.
+	   Never use following 
+	   port => 80 => Apache
+	   port => 3000 => react
+	   port => 5000 => Django
+	   Note ::Never use reserved Port
+	   
+	   8080 => by-default port.
+	   7080
+	   7000
+	   const PORT=8080;
+	   
+	   http.listen(PORT,function()=>{
+	   
+	     console.log('Server Started Sucessfully at port'+PORT)
+	   
+	   });
+	   
+	   
+	   How to send Json Response to the Browser:-
+	   *************************************
+	   1. You should have a Array of Json Object which can be 
+	   send as response to server.
+	   2. set the content-type : application/json
+	   3. use JSON.stringify() to encode the Json to String : Serialisation.
+	   
+	   Note :: Why we are using JSON.stringify,
+	   becuase of two reason
+	   1. response.write() only takes string Input
+	   2. Browser only Understand text or tag.
+	   
+	   
+	   How to send html Response to the Browser:-
+	   ***************************************
+	   1. response.writeHead(200,{"Content-Type":"text/html"});
+	   2. response.write("<h1> This is Heading </h1>");
+	   
+	   Note here is problem :-
+	   You cannot write lot of html code.
+	   You can use template string and Write the web-page code 
+	   and you can then pass that variable as response to write();
+	   
+	   Problem:-
+	   ********
+	   Right now we are writing all data level code and design level code 
+	   in server.js 
+	   
+	   data level  => model
+	   design level => view
+	   hence we must organise the data in mvc design pattern to follow modular approach.
+	   
+	   Project structure of mvc Node Application:-
+	   ******************************************
+	   controller
+	   model
+	   view
+	   index.js or server.js 
+	   .env => configuration or Environment varaible.
+	   .gitIgnore
+	   package.json 
+	   package-lock.json
+	   
+	   This project structure is common
+	   for all, projects.
+	   
+	   controller => folder mkdir
+	   model => folder mkdir 
+	   view => folder mkdir
+	   index.js => touch command
+	   package.json => npm init -y
+	   package-lock.json => npm install
+	   
+	   Note if package.json 
+	   *********************
+	   will install node_modules folder
+	   if any dependencies are added in package.json 
+	   
+	   Note :: please make use of git bash 
+	   terminal.
+	   
+	   Making a Node Module:-
+	   *************************
+	   
+	   1. module.exports = {}
+	   2. exports.var = var;
+	   
+	   Note :: module.exports/exports both referes to global empty Object 
+	   this => {} => global empty Object.
+	   
+	   module = {exports : {x:10}}
+	   module.exports = {x:10}
+	   module.exports.x=10
+	   
+	   var x=10;
+	   module = {exports:x}
+	   module.exports = x;
+	   
+	    In flexible there is no difference B/w module.exports and exports.
+		but in strict mode we cannot use exports directly.
+		it is because module is a mendatory, Object in strict mode.
+		
+		but since module refer to this Object.
+		you can pass varaible in following
+		1. module.exports = x;
+		2. this.exports = x;
+		3. exports.x=x;
+		   |
+		   this => module.
+		   
+		   
+		   exports === module.exports : strict mode : off 
+		   exports != module.exports : strict mode : on
