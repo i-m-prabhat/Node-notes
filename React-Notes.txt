@@ -1,0 +1,207 @@
+What is React.js?
+*********************
+React is a JavaScript library created by Facebook to create user interface(UI).
+React is Used to make a single page Application(SPA).
+React allows us to create reusable UI components.
+
+What is Single Page application?
+*********************************
+Single page application also known as SPA in short, Is an application that loads only a single document and then updates the body content of the single document via JavaScript APIs.
+
+Benefits of SPA.
+*****************
+it allows users to use websites without loading whole new pages, which results in performance gains and a more dynamic experience.
+
+What is Component in React?
+*******************************
+Components are independent and reusable bits of code. They serve the same purpose as Javascript function, but work in isolation and return HTML.
+Components come in two types, Class components and Function Components.
+
+Application
+    * Header
+    * Body (Content)
+    * Sidebar
+
+React installation steps
+*************************
+    1. Install Node.js and npm
+    2. Install text Editer like VS Code
+    3. Install React using "npx create-react-app App-Name" command
+
+What is JSX?
+***************
+JSX stands for JavaScript XML or Extension.
+With the help of JSX we can write and add HTML in React.
+JSX converts HTML tags into React Element.
+it's not compulsory to use JSX.
+
+    Rules of writting JSX.
+    -----------------------
+    > HTML code must wrap into one top level element.
+    > Elements must be closed.
+    > Attribute class = className & for = HTMLfor
+    > No if else condition inside jsx but ternary operator is okey.
+    > JS expression in JSX must be wrapped in {}.
+
+What is Props?
+***************
+Props stands for Properties.
+Props are used to transfer data from one Component to another.
+Props are read only.
+Props are just like a function in JavaScript.
+
+What is State in React?
+*************************
+The state is a built-in React object that is used to contain data or information about the components.
+A state can be modified based on user action or network changes.
+Everytime when the state of an object changes, React re-render the component to the browser.
+
+Rules of using Hooks?
+***********************
+1. Must be written inside function component.
+2. must be import in component.
+3. Must be call at top level of component
+4. cannot be conditional.
+
+useState hook 
+***************
+const [count, SetCount] = useState(0);
+const [data, SetData] = useState("king");
+
+useEffect hook
+***************
+useEffect( ()=>{
+    console.log("component mounted");
+});
+
+useEffect( ()=>{
+    console.log("component mounted");
+},[]);
+
+useEffect( ()=>{
+    console.log("component mounted");
+},[count]);
+
+useEffect( ()=>{
+    console.log("component mounted");
+},[count,data]);
+
+useRef hook
+************
+useRef hook is used for dom manipulation
+
+const refElement = useRef("");
+refElement.current.focus();
+refElement.current.style.color="blue"
+refElement.current.value="Random text"
+
+example:-
+    import React,{useState,useRef} from "react";
+
+    function App(){
+        const refElement = useRef("");
+        const [name, setName] = useState("Prabhat");
+        console.log(refElement);
+
+        function Reset(){
+            setName("");
+            refElement.current.focus();
+        }
+
+        function handleInput(){
+            refElement.current.style.color="blue"
+            refElement.current.value="Random text"
+        }
+
+        return (
+            <>
+            <h1>Learning useRef</h1>
+            <input ref={refElement} type="text" value={name} onChange={(e)=>setName(e.target.value)}></input>
+            <button onClick={Reset}>Reset</button>
+            <button onClick={handleInput}>handle Input</button>
+            </>
+        )
+    }
+
+
+Prop Drilling:-
+****************
+Parent ➡ ChildA ➡ ChildB ➡ ChildC ➡ ChildD;
+
+
+What is context API?
+*********************
+Context API is a built-in API introduced in React 16.3. It makes it possible to pass data from parent to children nested deep down the component tree directly,instead of passing it down through a chain of props.
+
+create, provider, consumer
+
+const data = createContext();
+const name = "prabhat";
+<data.Provider value={name}>
+    <Child/>
+</data.Provider>
+<data.Consumer>
+    {
+        (name)=>{
+            return(
+                <h1>My name is {name}</h1>
+            )
+        }
+    }
+</data.Consumer>
+
+Example:-
+parent component
+------------------
+import react,{createContext} from "react";
+import Child from "./Child";
+
+const data = createContext();
+const data2 = createContext();
+
+function ParentComponent(){
+    const name = "Prabhat";
+    const gender = "Male";
+
+    return(
+        <>
+        <data.Provider value={name}>
+            <data2.Provider value={gender}>
+                <Child/>
+            </data2.Provider>
+        </data.Provider>
+        </>
+    )
+}
+
+export default ParentComponent;
+export {data,data2};
+
+
+child component
+-----------------
+import React from "react";
+import {data,data2} from "./ParentComponent"
+
+function Child(){
+    return(
+        <data.Consumer>{
+            (name)=>{
+                return(
+                    <data2.Consumer>
+                    {
+                        (gender)=>{
+                            return(
+                                <h1>My name is {name} and my gender is {gender}</h1>
+                            )
+                        }
+                    }
+                    </data2.Consumer>
+                )
+            }
+        }
+        </data.Consumer>
+    )
+}
+
+export default Child;
