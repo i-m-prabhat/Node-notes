@@ -41,7 +41,7 @@ it's not compulsory to use JSX.
     > Elements must be closed.
     > Attribute class = className & for = HTMLfor
     > No if else condition inside jsx but ternary operator is okey.
-    > JS expression in JSX must be wrapped in {}.
+    > JavaScript expression in JSX must be wrapped in {}.
 
 What is Props?
 ***************
@@ -295,3 +295,301 @@ useCallback(fn, deps) is equivalent to useMemo(() => fn, deps).
 
 Lifting State Up
 ******************
+Lifting State Up or data transfer from Child to parent 
+
+Example:-
+ParentComponent
+---------------
+import Child from "./Child";
+
+function ParentComponent() {
+    function getData(data){
+        console.log(data);
+    }
+    return(
+        <>
+            <Child getData={getData}/>
+        </>
+    );
+}
+
+
+Child component
+----------------
+import React,{useState} from "react";
+
+function child(props){
+    const [name, setName] = useState();
+    function handleSubmit(e){
+        e.preventDefault();
+        props.getData(name);
+    }
+    return(
+        <form onSubmit={handleSubmit}>
+            <input type='text' value={name} onChange={(e)=> setName(e.target.value)}></input>
+            <button>Submit</button>
+        </form>
+    )
+}
+
+export default Child;
+
+Registration Form in React
+****************************
+import React,{useState,useEffect} from "react";
+
+function Form(){
+    const data={name:"",email:"",password:""};
+    const [inputData, setInputData] = useState(data);
+    const [flag, setFlag] = useState(false);
+
+    useEffect(()=>{
+        console.log("Registered");
+    },[flag])
+
+    function handleData(e){
+        setInputData({...inputData, [e.target.name]:e.target.value})
+        console.log(inputData)
+    }
+    function handleSubmit(e){
+        e.preventDefault();
+        if(!inputData.name || !inputData.email || !inputData.password){
+            alert("All Fields are Mendatory")
+        }else{
+            setFlag(true)
+        }
+    }
+
+    return(
+        <>
+        <pre>{(flag)?<h2>Hello {inputData.name}, You've Registered Successfully</h2>:""}</pre>
+        <form onSubmit={handleSubmit}>
+            <h1>Registration Form</h1>
+            <input type='text' name='name' value={inputData.name} onChange={handleData} placeholder="Enter Your Name"></input> <br/>
+
+            <input type='text' name='email' value={inputData.email} onChange={handleData} placeholder="Enter Your Email"></input> <br/>
+
+            <input type='password' name='password' value={inputData.password} onChange={handleData} placeholder="Enter Your Password"></input> <br/>
+
+            <button type='Submit'>Register</button>
+        </form>
+        </>
+    )
+}
+
+
+List rendering using map()
+***************************
+Array.prototype.map()
+    The map() methos creates a new array populated with the result of calling a provided function on every element in the calling array.
+
+    Example:-
+    const array = [1,2,3,4,5,6,7,8];
+    const double = array.map(x => x*2);
+    console.log(double);
+    //expected output: [2,4,6,8,10,12,14,16]
+
+map() with key
+***************
+const array = [1,2,3,4,5,6,7,8];
+const double = array.map((x,index)=> <h1 key={index}>{x*2}</h1>)
+console.log(double);
+    //expected output: [2,4,6,8,10,12,14,16]
+
+
+useState hook with object
+**************************
+import react,{useState} from "react";
+
+function App(){
+    const [values, setValues]= useState({firstName:"King", lastName: "Kohli"});
+    function updateName(){
+        setValues({...values, firstName: "Virat"})
+    }
+
+    return(
+        <>
+        <h1>First Name is {values.firstName} and Last Name is {values.lastName}</h1>
+        <button onClick={updateName}>Update</button>
+        </>
+    )
+}
+
+export default App;
+
+
+useState hooks with an Array
+*****************************
+import react,{useState} from "react";
+
+function App(){
+    const [items, setItems] = useState([]);
+    console.log(items);
+
+    function addItems(){
+        setItems([...items, {
+            id: items.length,
+            value: Math.random();
+        }])
+    }
+
+    return(
+        <>
+        <ol>
+            {
+                items.map(items => (
+                    <li key={items.id}>{items.value}</li>
+                ))
+            }
+        </ol>
+        <button onClick={addItems}>Add Items</button>
+        </>
+    )
+}
+
+
+ToDo List in React
+*******************
+import react,{useState} from "react";
+
+function TodoList() {
+    const [activity, setActivity] = useState("");
+    const [listData, setListData] = useState([]);
+
+    function addActivity(){
+        setListData((listData)=>{
+            const updatedList = [...listData,activity]
+            console.log(updatedList)
+            setActivity("");
+            return updatedList;
+        })
+    }
+
+    function removeActivity(i){
+        const updatedListData = listData.filter((element, id)=>{
+            return i!=id;
+        })
+        setListData(updatedListData);
+    }
+    function removeAll(){
+        setListData([]);
+    }
+
+    return(
+        <>
+        <h1>TODO LIST</h1>
+        <input type='text' placeholder='Add Activity' value={activity} onChange={(e)=>setActivity(e.target.value)}></input>
+        <button onClick={addActivity}>Add</button>
+        <p> Here is Your List :{")"}</p>
+        {
+            listData!=[] && listData.map((data, i)=>{
+                return(
+                    <>
+                    <p key={i}>
+                        {data}
+                        <button onClick={removeActivity(i)}>remove(-)</button>
+                    </p>
+                    </>
+                )
+            })
+        }
+        {listData.length>=1 && <button onClick={removeAll}>Remove All</button>}
+        </>
+    )
+}
+
+useReducer hook
+******************
+What is useReducer?
+> useReducer is a react hook used for state management.
+> Alternative of useState() hook.
+> Preferable for complete state management logic.
+
+Syntax
+    const [state, dispatch] = useReducer(reducer, initialstate)
+                                            ⬇
+                                        reducer(currentState, action)
+
+What is reducer?
+> Reducer is a function accepts two paramiter
+    newState=reducer(currentState, action)
+
+Example:-
+------------
+import React,{useReducer} from 'react';
+
+const initialstate=0;
+const reducer = (state, action)=>{
+    switch(action){
+        case "Increment":
+            return state+1
+        case "Decrement":
+            return state-1
+        default :
+            return state
+    }
+}
+
+function Counter(){
+    const [count, dispatch] = useReducer(reducer, initialstate)
+
+    return(
+        <>
+            <button onClick={()=>dispatch("Increment")}>+</button>
+            <div>Count = {count}</div>
+            <button onClick={()=>dispatch("Decrement")}>-</button>
+        </>
+    )
+}
+
+export default Counter;
+
+
+
+Custom Hooks in React
+***********************
+> A custom Hooks is a JavaScript function whose name starts with "use".
+> We can use Other hooks in custom hooks as well.
+
+Why to use Custom Hook?
+    to remove the duplicated logic in components and we can extract that logic to custom hook.
+
+Example :-
+creating a Counter Hook useCounter
+import {useState} from 'react';
+
+function useCounter(initialValue = 0){
+    const [count, SetCount] = useState(initialValue);
+
+    function Increment(){
+        SetCount(count+1)
+    }
+
+    function Decrement(){
+        SetCount(count-1)
+    }
+
+    return [count, Increment, Decrement]
+}
+
+export default useCounter;
+
+
+using useCounter custom hook in App component ⬇
+---
+import React from 'react';
+import useCounter from "./useCounter";
+
+function App(){
+    const [count, Increment, Decrement] = useCounter(10);
+
+    return (
+        <>
+            <button onClick={Increment}>Increment</button>
+            <div>Count = {count}</div>
+            <button onClick={Decrement}>Decrement</button>        
+        </>
+    )
+}
+
+export default App;
