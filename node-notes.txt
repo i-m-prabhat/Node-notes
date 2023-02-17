@@ -498,3 +498,101 @@ Date : 10-02-2023
 		   
 		   exports === module.exports : strict mode : off 
 		   exports != module.exports : strict mode : on
+
+
+Implementation modularity in mvc:-
+************************************
+We know that,
+m => model
+v => view
+c => controller
+
+It is always better approach, to keep the different Js file with in different associated folder such that modularity of the project can be maintained.
+
+StudentModel.js Model suffix => pascal case 
+StudentController.js Controller suffix => pascal case.
+students.js =>view lovwecase suffix.
+            Note :: Template Engine 
+                pug : students.pug
+                EJS : student.ejs
+                jade : student.jd 
+                handlebars : student.hbs
+                mustaches : mts 
+
+                These template files on views are called as partials.
+                Views 
+                    |partials
+                        ....template Engines.
+                    |layouts
+                        index.html,index.js    
+
+StudentModel.js
+*****************
+data of the Student model => 
+
+Api call => student data.
+
+var studentModel = {
+    students:[
+        {
+            "id":1001,
+            "name": "Prabhat",
+            "class": "Btech",
+            "stream": "CS"
+        },
+        {
+            "id":1002,
+            "name": "virat",
+            "class": "Btech",
+            "stream": "IT"
+        },
+        {
+            "id":1003,
+            "name": "Salmon",
+            "class": "BA",
+            "stream": "Hindi"
+        },
+        {
+            "id":1004,
+            "name": "Akash",
+            "class": "MBA",
+            "stream": "IT"
+        },
+    ]
+}
+
+module.exports = studentModel
+
+StudentController.js
+**********************
+const studentModel = require("./studentModel");
+1. data from model to controller 
+
+    Response Object it must contain
+    1. code : 201
+    2. data : it can be array or object  [], {}
+    3. status : true or false
+    4. message or comment : "Login Successfull","Oops something, went wrong".
+    5. error : by-default it will be false, if any error error message will be raised
+
+        let response = {};
+
+        try and catch.
+        let promise = fetch(url).then().then.catch((error)=>{
+            let responseError = error
+        });
+
+        JsonResponse = {
+            "code" : 404,
+            "message" : "Runtime Exception cannot Post data",
+            "data" : [],
+            "status" : false
+            "error" : responseError
+        }
+
+        response.writeHead(200,{"Content-Type":"application/json"})
+        or
+        response.writeHead(200,{"Content-Type":"application/json;Charset=utf-8"})
+        response.write(JSON.stringify(JsonResponse));
+
+2. response.write();
