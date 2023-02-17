@@ -65,8 +65,8 @@ Rules of using Hooks?
 
 useState hook 
 ***************
-const [count, SetCount] = useState(0);
-const [data, SetData] = useState("king");
+const [count, setCount] = useState(0);
+const [data, setData] = useState("king");
 
 useEffect hook
 ***************
@@ -150,10 +150,10 @@ const name = "prabhat";
     }
 </data.Consumer>
 
-Example:-
+Example:-.
 parent component
 ------------------
-import react,{createContext} from "react";
+import React,{createContext} from "react";
 import Child from "./Child";
 
 const data = createContext();
@@ -260,7 +260,7 @@ export default Child;
 
 useMemo hook
 *************
-conat variableName = useMemo(()={
+conat variableName = useMemo(()=>{
     console.log("***************");
     return statement;
 },[state])
