@@ -181,13 +181,13 @@ if any dependencies are added in package.json
 
 ## Making a Node Module:-
 
+1. module.exports = {} <br/>
+2. exports.var = var; <br/>
 	   
-	   1. module.exports = {} <br/>
-	   2. exports.var = var; <br/>
-	   
-	   Note :: module.exports/exports both referes to global empty Object <br/> 
-	   this => {} => global empty Object.<br/>
-	   ```
+Note :: module.exports/exports both referes to global empty Object <br/> 
+this => {} => global empty Object.<br/>
+
+```
 	   module = {exports : {x:10}}
 	   module.exports = {x:10}
 	   module.exports.x=10
@@ -195,16 +195,17 @@ if any dependencies are added in package.json
 	   var x=10;
 	   module = {exports:x}
 	   module.exports = x;
-	   ```
-    <br/>
-	    In flexible there is no difference B/w module.exports and exports. <br/>
-		but in strict mode we cannot use exports directly. <br/>
-		it is because module is a mendatory, Object in strict mode.
-		<br/>
-		but since module refer to this Object.
-		you can pass varaible in following
-		```
-  1. module.exports = x;
+```
+<br/>
+In flexible there is no difference B/w module.exports and exports. <br/>
+but in strict mode we cannot use exports directly. <br/>
+it is because module is a mendatory, Object in strict mode.
+<br/>
+but since module refer to this Object.
+you can pass varaible in following
+
+```
+        1. module.exports = x;
 		2. this.exports = x;
 		3. exports.x=x;
 		   |
@@ -233,11 +234,13 @@ students.js =>view lovwecase suffix. <br/>
                 handlebars : student.hbs <br/>
                 mustaches : mts  <br/>
 
-                These template files on views are called as partials.
+These template files on views are called as partials.
                 Views  <br/>
-                    |partials
+                        | partials
                         ....template Engines.
-                    |layouts
+                        <br/>
+                        <br/>
+                    | layouts
                         index.html,index.js    
 <br/>
 StudentModel.js
