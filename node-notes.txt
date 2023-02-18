@@ -596,3 +596,35 @@ const studentModel = require("./studentModel");
         response.write(JSON.stringify(JsonResponse));
 
 2. response.write();
+
+
+Generating Pretty JSON Response :-
+***********************************
+by default when you will be using express module.
+you will get json() method, to print the output in pretty mode.
+but we are not using "express" module hence, we need to use JSON.stringify() to print the output in pretty mode.
+
+pretty mode in JSON.stringify() :-
+***********************************
+JSON.stringify({name:"prabhat",class:"Diploma"})
+
+output :
+    {name:"prabhat",class:"Diploma"}
+
+pretty Output :-
+you need to increase padding width or pretty width
+JSON.stringify(object,null,Pwidth)
+Pwidth = 1,2,..................n
+standard : 4
+
+JSON.stringify({name:"prabhat",class:"Diploma"},null,4)
+
+Output :
+{name:"prabhat",class:"Diploma"}
+{
+    name:"prabhat",
+    class:"Diploma"
+}
+
+
+fs module
