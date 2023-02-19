@@ -1,0 +1,77 @@
+What is Redux?
+***************
+Redux is a predictable state container for JavaScript apps.
+> Redux is a library for JavaScript Applications.
+> You can use Redux together with React, or with any other view library(Angular, Vue).
+> Redux is a state container.
+ Example- registration form
+
+ Core Concepts of Redux
+ ***********************
+ Store ::➡ Holds state of your application.
+ Action ::➡ Describe the changes in the state of application.
+ Reducer ::➡ Actually carries out the state transition dependending on the action.
+
+    Example ➡ Book Shop
+
+Shop ➡➡➡➡➡➡ ShopKeeper ➡➡➡➡ Customer
+(store)          (Reducer)          (action)
+
+Rules of Redux
+*****************
+> The state of your application is stored in an object tree within a single store.
+{
+    NumberOfBooks : 10
+}
+
+> Only wayto change the state is to emit an action an object describing what happened.
+{Type : "buyBook"}
+
+> To specify how the state tree is transformed by actions, we write pure Reducer. 
+
+How to install Redux in react app 
+**********************************
+to install redux in react use "npx install redux react-redux" command
+
+Action in Redux
+****************
+> Actions are JavaScript object that contains information.
+> Actions are the only source of information for the store. It only tells us what has happened.
+> Actions have a type property and it should be defined in string consistraint.
+> It is compulsory to include the type property in the object.
+
+Syntax:
+    const Actions = {
+        Type : 'TypeOfAction'
+    }
+
+
+Reducers in React
+******************
+> Reducers decides how the state of application changes depending upon the action sent to the store.
+> Reducers are the function that accepts state and action as parameter and returns the next state of the application.
+
+    (previousState, action) => newState.
+
+
+Redux Store
+*************
+> Entire Applicaton contains Single Store.
+> It is responsible for holding application state.
+> getState() method gives access to state it holds.
+> dispatch(action) method allow state to be updated
+> it has subscribe(listener) method as well by which we can register listeners.
+
+    This methd accepts funtion (listener) as a parameter which execute anytime when the state in Redux store changes.
+
+
+React Redux + Hooks
+********************
+React Redux offers set of hooks to - subscribe to redux store and dispatch actions.
+
+useSelector Hook-
+> useSelector is a hook react-redux library provides to get hold of any state that is maintained in the redux store.
+
+Syntax - const xyz = useSelector(selector: function, equalityFn: function)
+
+Selector function accepts the redux state as its argument and return a value.
