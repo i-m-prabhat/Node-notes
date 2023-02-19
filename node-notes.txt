@@ -628,3 +628,9 @@ Output :
 
 
 fs module
+(modes of file Handling)
+	
+	1. readFileASync() (readFile()) : used to read the content of the file. in binary format, or
+	utf8 format, by default readFileSync invokes filePointer which internally returned
+	buffer,hence we need to encode it.
+	Asynchronous Reading of the file => using callback.
