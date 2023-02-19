@@ -629,6 +629,24 @@ Output :
 
 fs module
 (modes of file Handling)
+************************
+File handling refers to the process of working with files in a computer system. Files can be opened in different modes, which determine how the file can be accessed and modified. Here are the most common modes of file handling:
+
+'r' - Read Mode: This mode opens a file for reading only. If the file does not exist, an error will be raised. The file pointer is placed at the beginning of the file.
+
+'w' - Write Mode: This mode opens a file for writing only. If the file exists, it will be truncated to zero length. If the file does not exist, a new file will be created. The file pointer is placed at the beginning of the file.
+
+'a' - Append Mode: This mode opens a file for writing, but the data is appended to the end of the file. If the file does not exist, a new file will be created. The file pointer is placed at the end of the file.
+
+'r+' - Read and Write Mode: This mode opens a file for both reading and writing. If the file does not exist, an error will be raised. The file pointer is placed at the beginning of the file.
+
+'w+' - Write and Read Mode: This mode opens a file for both writing and reading. If the file exists, it will be truncated to zero length. If the file does not exist, a new file will be created. The file pointer is placed at the beginning of the file.
+
+'a+' - Append and Read Mode: This mode opens a file for both reading and writing, but the data is appended to the end of the file. If the file does not exist, a new file will be created. The file pointer is placed at the end of the file.
+
+Each of these modes has its own set of advantages and disadvantages depending on the task at hand. For example, the read mode is useful when you only need to read data from a file, whereas the write mode is useful when you need to overwrite the contents of a file. The append mode is useful when you need to add new data to a file without overwriting the existing data.
+
+It's important to note that when a file is opened in write or append mode, any data that was previously in the file will be overwritten or appended, respectively. Therefore, it's important to use caution when working with files in these modes.
 	
 	1. readFileASync() (readFile()) : used to read the content of the file. in binary format, or
 	utf8 format, by default readFileSync invokes filePointer which internally returned
