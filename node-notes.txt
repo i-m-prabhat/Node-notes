@@ -647,8 +647,280 @@ File handling refers to the process of working with files in a computer system. 
 Each of these modes has its own set of advantages and disadvantages depending on the task at hand. For example, the read mode is useful when you only need to read data from a file, whereas the write mode is useful when you need to overwrite the contents of a file. The append mode is useful when you need to add new data to a file without overwriting the existing data.
 
 It's important to note that when a file is opened in write or append mode, any data that was previously in the file will be overwritten or appended, respectively. Therefore, it's important to use caution when working with files in these modes.
-	
-	1. readFileASync() (readFile()) : used to read the content of the file. in binary format, or
+
+1. readFileASync() (readFile()) : used to read the content of the file. in binary format, or
 	utf8 format, by default readFileSync invokes filePointer which internally returned
 	buffer,hence we need to encode it.
 	Asynchronous Reading of the file => using callback.
+	
+	Syntax:-
+	readFile("filename.txt","encoding",callbackFunction)
+	 1. filename.txt can be any file which can be as a input source file for reading.
+	 it can be txt,log, file or even html file.
+	 
+	 2. encoding : By default, FileReader in Fs module, invokes or call internal File Pointer
+	    by system call :fopen inside Primary Memory, and File Pointer return the Buffer data.
+		hence while reading the file Content buffer data must be converted 
+		into, proper formating like utf-8, utf8, or binary format.
+		
+		what is difference B/w binary encoding and utf-8 encoding:-
+		***********************************************************
+		
+		binary will not support unicode character : chinese,hindi langauge.
+		not read by binary langauge.
+		language data will only support Ascii character.
+		
+		for eg : kruti dev, emoji, special symbol character, these 
+		are unicode character. hence utf-8 or utf8 both will allow
+		any unicode character.
+		
+	3. callbackFunction : callback tells, that function itself is Asynchronous.
+	   syntax :- 
+	   function onReadingCompleted(error,data){
+	       if(error == null){
+		      let content = data;
+			  
+			  console.log(content); //console output.
+			  res.write(content); //Browser output
+		   }
+	   }
+	   
+	b) readFileSync:- it is a used to read File Content synchronously.
+	or in synchronouse mode.
+	
+	syntax :-
+	const fs = require("fs");
+	const data = fs.readFileSync("filename.txt","encoding");
+	for Eg:-
+	
+	const data = fs.readFileSync("input.txt","utf8");
+	Note :: Since it synchronouse it does not require any callback function.
+	
+	c) writeFileSync : it is used to write data to the file in synchronouse mode
+	  
+	  Syntax :-
+	  const content = "This is sample content";
+	  fs.writeFileSync("filename.txt",content,"encoding")
+	  
+	  1. filename.txt : is a output file where you want content to write.
+	  2. content : what content you want to write.
+	  3. encoding : utf-8,utf8,binary...
+	  
+	  Note :: if file does not exist it will create the file, since 
+	  the mode of the file is w:- (write mode)
+	  a) since everytime file is going to generate there is less chance of 
+	  any execption.
+	  b) write mode of the file is in overwrite mode.
+	     Any time of times you run the code, recent data will be lossed from
+		 the file and new data will be added.
+	    Solution : 
+		1. readthe file content, before writing
+		
+		Asynchronous reading :-
+		*************************
+		const content = "This is My New Data";
+		fs.readFile("output.txt","utf8",(error,data)=>{
+		   if(error == null){
+		   
+				content = data+content; //oldData + newData.
+				
+				fs.writeFileSync("output.txt",content,"utf8");
+		   }
+		    
+		});	
+		
+		2. appendFileSync() : used to write the File in Append Mode.
+	    
+		what is EOF and EOL?
+		
+		By default data write in a file, the it keeps on adding
+		data in same line, "\n" and End of Line (EOL).
+		
+	    by default file Pointer will keep on reading the data,
+		till, -1 is reached. => EOF.(or any -ve Integer constant)
+		
+		-------------Output.txt-------------
+		->0
+		->1
+		->2
+		->3
+		...
+		...
+		...
+		->n 
+		 -1
+		 
+		 
+	writeFile() : it is used to write File Asynchronously.
+	
+	Syntax :-
+	fs.writeFile("output.txt",content,"encoding",(error)=>{
+	    if(error == null){
+		   console.log("data written completed..");
+		}
+	});
+	a) output.txt : file where data is written
+	 mode : write
+	 write mode : overwrite
+	
+	b) content : Any data written in the content will be written inside file.
+	c) encoding : converting the buffer to standard encoding 
+	   utf-8, utf8 or binary.
+	   
+	d) callback function :  to write the back in asynchronous mode,and 
+	it has argument 1st => error 
+	if(error == null){
+	   //any action file writing completed.
+	}
+	
+	appendFileSync: same as writeFileSync, working and syntax is same 
+	***************
+	 writeMode : append mode 
+	 data wont be lossed.
+	 mode : synchronous
+	 
+	appendFile: same as witeFile
+	************
+	  writeMode : append mode 
+	  data wont be lossed.
+	  mode : Asynchronous.
+	  
+	  unlink : this is also, asynchronous function used to, delete the file,
+	  ******** 
+       from, fileSystem.
+	   mode : Asynchronous
+	   No of arguments : 2
+	   1. filename  : relative url file, or complete url for filename.
+	   2. callback. : its function which holds error as argument,
+	      which tells if any error, occurred during deleting a file.
+		  
+		syntax :-
+		**********
+		complete Url :- 
+        fs.unlink("c:/path/to/filename.txt",(error)=>{
+		
+		   if(error){
+				//any action
+				console.log('file deleted successfully');
+		   }
+		   
+		})	
+
+        Relative Url:-
+        fs.unlink("./filename.txt",(error)=>{
+		
+		   if(error){
+				//any action
+				console.log('file deleted successfully');
+		   }
+		   
+		})		
+
+         or
+        fs.unlink("../public/filename.txt",(error)=>{
+		
+		   if(error){
+				//any action
+				console.log('file deleted successfully');
+		   }
+		   
+		});
+
+       stat:- it is used see file related information.
+	   mode : asynchronous
+	   argument : 2
+	   1. path or filename : relative or absolute(complete path)
+	   2. callBack Function : it is used to capture any error, and fileInformation about the file.
+	   
+	   syntax:-
+	   fs.stat("path/to/file",(eror,fileInfo)=>{
+	      if(error == null){
+			console.log(fileInfo);
+		  }
+	   })
+	       
+		   
+	 task :  convert the size of file to KB/Mb
+	 *******************************************
+	 Kb => fileInfo.size/1024
+	 MB => (fileInfo.size/1024)/1024
+	 or 
+	 mb => Kb/1024.
+	 
+	 copy(): this is not in fs module 
+	     1. readFile the from source
+		 2. writeFile the to target.
+	 move():
+	     1. readFile from source
+		 2. writeFile to the destination
+		 3.delete the source file. (unlink)
+		 
+	 logger(): it is custom function used to log the activity of the user/error
+	 for this we use, writeFile() function, to keep the log with date and time.
+	 so that any actions or error occurred can be seen, later.
+	 
+	 importance :-
+	 in server, we are not allowed to console the output or error.
+	 so in order to save the error at server level, and security purpose.
+	 we generate the log file.
+	 
+	 rename(): it is a function inside fs module used to, rename the file
+	 from old name to new Name
+	 mode : asynchronous
+	 arguments : 3
+	 
+	 syntax:-
+	 fs.rename("path/to/oldfilename","NewFilename",(error)=>{
+	     if(error == null){
+		    console.log("file renamed successfully");
+		 }
+	 });
+	 
+	 readdir() : it is function which executes ls command in cmd.
+	 $ ls : show files and folder list.
+     shows list of files and folder.
+     
+    mode : asynchronous
+    arguments : 2
+
+    syntax:-
+    fs.readdir("path/to/folder",(error,list)=>{
+	     if(error == null){
+		    console.log(list); //Object or array showing list of files and folders.
+		 }
+	});	
+	 
+	
+	__dirname() : it is magic constant (mangeled) 
+	    1. global scope 
+		2. donot require any module.
+		3. use : to show current directly path.
+		
+	
+	__filename() : it is also magic constant (manageled)
+	    1. global scope
+		2. donot require any module.
+		3. use : to show current filename of the script
+		
+		node index.js
+		__filename : index.js.
+		
+		
+		Note :: Name mangeling :
+		it is varible or constant naming convention to tell that it is special
+		 function or do something special.
+		 
+		 this : global scope constant object. [Non-mangeled]
+		 window : global scope constant object.  [Non-mangeled]
+		 document : global scope constant object.  [Non-mangeled]
+		 __proto__: it is global scope   [mangeled]
+		 __dirname : global scope   [mangeled]
+		 __filename : global scope   [mangeled]
+		 
+		 it is very common technique in all langauge.
+		 for eg : php,python,js, node Js.
+		 
+		 Misconception : mostly __dirname and __filename are going 
+		 be used, with fs module.
+		 so people think __dirname and __filename are of fs module.
+		 but due to mangling, they donot require fs module.

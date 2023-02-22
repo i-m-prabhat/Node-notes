@@ -31,3 +31,13 @@ is JavaScript & Node are the Same?
 > Node can connect with DB.
 > Node js run on the server side
 > JavaScript is run on the browser
+
+Node Js is Single Thridded because  it runs Single Task at a Time.
+
+Node Js is async
+*****************
+> Run First Script
+> Run Second Script(complex data)
+    ......it will not wait to finish 2nd script ..
+> Run Third script
+> continue...
