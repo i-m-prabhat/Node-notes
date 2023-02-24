@@ -924,3 +924,118 @@ It's important to note that when a file is opened in write or append mode, any d
 		 be used, with fs module.
 		 so people think __dirname and __filename are of fs module.
 		 but due to mangling, they donot require fs module.
+
+
+		
+     wrapper functions:-
+******************************
+wrapper : its is container or cover which covers any thing, for 
+safe use.
+
+in python :-
+ print('Hello world');
+ 
+ as per python standard every program must wrapped inside a wrapper function
+ def main():
+   print('Hello world')
+   
+   wrapper function : is not only the code of node 
+   but it is available in c, c++, Java.
+   
+	Every code you execute in Node Js is automatically covered with a wrapper
+	function.
+	
+	index.js
+	console.log('Hello world');
+	
+	node index.js
+	Hello world 
+	Internally
+	*************
+	
+	index.js <---------------Fs module --------| internally source code read
+	*fp (file pointer) ----------> source code --------> V8-Engine
+	                                                       |
+														   |
+
+	(function(exports,require,module,__filename,__dirname){
+	     Hello world ;
+	});
+	
+	node index.js
+	
+	Es6 standard in Node Js 
+	****************************
+	we know that, React uses import statement which is run in V8 Engine.
+	why node does not support es6 import statement.
+	because of wrapper function, overrides behaviour of importing by require.
+	
+	How to use import statement in Node Js 
+	**************************************
+	there are 2 ways
+	1. package.json => declare "type":"module" (standard)
+	2. rename file from .js to .mjs 
+	
+	react 
+	  src
+	    index.js 
+	node 
+	  server 
+	    index.js
+	
+	first method :
+	*****************
+	this is standard way, this is how, you cannot front with backend 
+	with same server file => index.js 
+	
+	Explain Error :
+	ReferenceError: require is not defined in ES module scope, you can use import instead
+	
+	How to use Both :-
+	*****************
+	for this we have write 2 extra lines of code.
+	automatically you can use import and require together.
+	
+	import {createRequire} from "module"
+	const require = createRequire(import.meta.url);
+	
+	import fs from "fs"; //valid
+	const fs = require("fs"); //valid
+	
+	Note :: when we use both import and require together due to ES6 Standard, specification
+    the wrapper function is overriden and all the constants.
+    like,
+
+    module,exports,__filename,__dirname,require 
+	every constant is out of the scope.
+	
+	Node Js 
+	*************************
+	p1.js                            p2.js 
+	a, -------> module.exports   X       a //out of scope
+	b, -------> module.exports   X       b //out of scope
+	c  -------> module.exports   X       c //out of scope
+	
+	in import syntax :-
+	***********************
+	
+	p1.js                      p2.js
+	a, -------> export  ✔      a //global scope
+	b, -------> export  ✔      b //global scope
+	c  -------> export  ✔      c //global scope
+	
+	working with querystring module:-
+	**********************************
+	it used to parse QueryString in get and post request.
+	querystring : parse method which converts key and value pairs.
+	converts in Object
+	
+	var q = ?x=10&b=20&name=ravi&class=btech
+	
+	query.parse(q);
+	{
+	  x:10,
+	  b:20,
+	  name:"ravi",
+	  class:"btech"
+	}
