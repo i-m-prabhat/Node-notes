@@ -1039,3 +1039,27 @@ in python :-
 	  name:"ravi",
 	  class:"btech"
 	}
+
+
+
+
+Working With OS module in Node Js :-
+ *************************************
+ Os Module : is one most, popular core built module, which is directly or indirectly used by many, modules as dependency.
+ This is read Only Module or unmutable module.
+ it is some predefined, functions and constant variable for grtting information.
+
+ Syntax:-
+    const  os = require('os');
+    console.log(os);
+
+
+Why OS module is important
+***************************
+1. for getting system information,platform information
+2. for checking the performance for management of load Balencer in aws.
+3. used in pipelines to automatically reserve sockets, port according to availabele memory and Priority.
+4. To delete EQL in fileHandling By fs module.
+
+    os module is > dependency > fs module.
+    
