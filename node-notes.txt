@@ -1062,4 +1062,68 @@ Why OS module is important
 4. To delete EQL in fileHandling By fs module.
 
     os module is > dependency > fs module.
-    
+	
+	
+
+using database in Node Js for permanent, data storage.
+*******************************************************
+Till now we were storing the temprory data in file system.
+fs module => write function use => data write in file.
+it is permanently stored. but even though it is, temprory.
+
+because while storing the data in file system.
+we don't have 
+1. security option.
+2. No Proper arrangement data.
+3. No backup facility if data deletes.
+
+hence, we store the data permanently in database.
+
+Here we are going to use two databases
+1. schema based : (sql based) : All databases which use query have common code.
+    mysql,oracle,postgresSQL, MS SQL, MS Access, MariaDB
+
+    mysql : user,host,password,database
+        dataType : varchar
+        superUser : root
+
+    oracle : sysUser,hostName,Password,dbname
+        dataType : varchar2
+        superUser : system, sysAdmin
+
+2. No schema : (No sql)
+    mongoDB, cassendra, memCacheDb,Redis, CouchDB,DynamoDB etc..
+
+    Server in aws
+    30+ Database.
+
+    security high(data size) : DynamoDB
+    less security size Heavy : mongoDB
+
+Xampp or wamp:-
+****************
+hostname : localhost or 127.0.0.1 or ::1 (loopBackIP Address)
+
+localhost => domain Name
+127.0.0.1 => loopBackIP Address : localIP Address
+::1 => Foreign Address =>
+
+client and server : same IP => localAddress.
+
+client : Address : IP x.x.x.x  local Address for client 
+                    Foreign Address for Server 
+                        |
+                        |
+                        |
+                    Foreign Address for client
+Server : Address : IP y.y.y.y local Address for server
+
+
+
+How to connect Node Application with mysql :-
+**********************************************
+
+
+
+
+
