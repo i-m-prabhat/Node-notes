@@ -14,6 +14,7 @@ const connection = mysql.createConnection(config.dbcofig.mysql);
 try {
     connection.connect();
     console.log('Connection Created Successfully!')
+
 } catch (error) {
     console.log('Connection Error',error);
 }
