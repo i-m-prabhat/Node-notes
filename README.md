@@ -2,6 +2,10 @@
 
 <a href="./fsModule.md">FS Module</a>
 
+<br/>
+<a href="https://github.com/Vasu7389/JavaScript-Interview-Questions-2023/blob/master/README.md">JavaScript Interview tricky questions</a>
+<br/>
+
 ## How to create a Node server
 
 To crate a node server in Node js we need two things
