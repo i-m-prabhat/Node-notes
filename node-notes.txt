@@ -1197,3 +1197,44 @@ if no of records = 10 or 7 or 100 or 1 or 10
 then
 affectedRows : 10 or 7 or 100 or 1 or 10,
 insertId : 0
+
+
+Concept of Query Builder. or Active Records or ORM :-
+******************************************************
+1. Query Builder : It, is a set of function or classes and methods
+which can be used to build, Queries.
+
+2. Active Records : Queries ready to use, hence they are always active and called as, active records.
+
+3. ORM :- Object Relational Mapper.
+user = {
+    'name' => 'Prabhat',
+    'class' => 'Btech',
+    'marks' => 70,   
+}
+
+typeof(user) //Object inser mongodb => as a Object
+                Object ----> mysql ------> user => user => table
+                                                    name,class,marks => columns.
+                                                    [model]
+
+                                                        database schema or representation
+keys ----> match --> columns.
+values ---> match ---> records.
+
+insert into tablename([.....n]) and value('','','','','',.....);
+
+insert('tablename'),{
+    'name':'Amit',
+    'class':'LKG',
+    'marks':'50',
+}
+
+
+
+
+
+
+
+
+
