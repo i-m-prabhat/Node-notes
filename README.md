@@ -6,6 +6,16 @@
 <a href="https://github.com/Vasu7389/JavaScript-Interview-Questions-2023">JavaScript Interview tricky questions</a>
 <br/>
 <a href="https://github.com/Vasu7389/ReactJs-Interview-Question-2023">React Interview Questions</a>
+<br/>
+<a href="https://github.com/trekhleb/javascript-algorithms">JavaScript DSA</a>
+<br/>
+<a href="https://github.com/lydiahallie/javascript-questions">JavaScript interview questions </a>
+<br/>
+<a href="https://github.com/ryanmcdermott/clean-code-javascript">JavaScript Clean Code </a>
+<br/>
+<a href="https://github.com/denysdovhan/wtfjs#-and-null-are-objects">funny and tricky JavaScript examples</a>
+<br/>
+<a href="https://github.com/getify/You-Dont-Know-JS">You Don't Know -JS</a>
 <hr/>
 
 ## How to create a Node server
