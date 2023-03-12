@@ -1,0 +1,88 @@
+Express :-
+Express is just like express way.
+
+This Application was build on core:-
+***************************************
+
+here server was set up using core http module.
+config
+controller 
+model
+view
+App.js
+index.js
+
+---->Keypoints of Express:-
+1. its is fast
+2. it is easy then core.
+3. more moduler approach to code. 
+4. you can manage code in more better way.
+5. it is framework of Node Js.
+6. get and post handle easy.
+7. Pure mvc Architecture.
+8. inBuilt Features, middleware(view |middleware(middleman)| constroller |middleware| view)
+9. inBuilt Router
+    core coding : switch case break statement.
+10 express Router
+11. Automatic Request http method : GET,POST,PUT,PATCH,DELETE.
+12. That is why making api is Quit easy with express.
+
+ Other framework of Node js:-
+1. express
+2. Fastify
+3. Hapi
+4. Koa.js
+5. Next.js
+
+express js Allows you to create project itself:-
+with different View template support.
+npx create-react-app   similarly
+npx express with --view=ejs or pug or handlebar <app-name>
+
+express :-
+1. express App generater : using this you can create Blank Project just like react js
+2. create express core from scratch:-
+
+How to create Node-express App:-
+******************************************
+1. mk app-name
+2. cd app-name
+3. npm init -y
+4. open package.json 
+     add dependency
+{
+"dependencies":{
+"express":"latest"
+}
+}
+
+5.  npm install.
+   directory node module
+6. index.js  => server
+
+old Server code:-
+*********************
+const http = require('http');
+const server = http.createServer((req,res)=>{
+res.writeHead(200,{
+"Content-Type":"application.json"
+});
+});
+---------------------------------------------------------------------------------------------------------
+Express server   : -
+
+const express = require('express');
+const app = express();
+
+app.listen(8080,()=>{
+console.log('server started');
+});
+
+app.get('/',(req,res)=>{
+
+res.write("Hello from express");
+res.end();
+
+});
+
+

@@ -1,0 +1,15 @@
+what is #!(shebang)
+***********************
+The “#!” prefix in any Unix shell script has a wider meaning than just Python. The “hash-bang” prefix is a magic number specifying that the file is a shell script. The following path and options specify the interpreter and its options to execute the script. This has a been a Unix kernel standard since system 7 back in 1980.
+
+What is bin www in node?
+*************************
+The file /bin/www is the application entry point! The very first thing this does is require() the "real" application entry point (app. js, in the project root) that sets up and returns the express() application object. #!/usr/bin/env node /** * Module dependencies.
+
+Why use bin/www and not index.js?
+**********************************
+You're used to running npm run, but not sysadmin. He will look for executables (attribute x) in thebin directory.
+
+The entry point index.js is for node module. All packages that provide commands to run on the console contain the bin directory.
+
+The extension is removed because it is not a script, but as a program. And these do not have extensions.
