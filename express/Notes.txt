@@ -85,4 +85,195 @@ res.end();
 
 });
 
+------------------------------------14-03-2023--------------------------------------------
 
+Our Requirement is to create full functional application:-
+project structure:-
+1. config
+2. controller
+3. model
+4. views
+5. public
+6. routes
+7. index.js
+8. package.json
+9. package-lock.json
+
+Next Step:- Add dependencies
+{
+    "dependencies":{
+        "express":"latest",
+    }
+}
+
+Adding Hot Reloading:-
+using nodemon :-
+local server with autoreloading feature.
+
+nodemon install
+1. locally 
+  npm install nodemon
+  or
+
+  {
+    "dependencies":{
+        "express":"latest",
+        "nodemon": "latest"
+    }
+  }
+
+    npm install
+
+2. globally
+npm install --global nodemon
+
+nodemon.cmd
+nodemon.bat
+global path.
+
+npx nodemon index.js => server start.
+node nodemon index.js
+
+in order to run using npm :-
+locally :-
+open package.json
+{
+    "scripts":{
+        "test": "node test for error",
+        "start": "node ./node_modules/nodemon/bin/nodemon.js index.js"
+    }
+}
+
+globally :-
+open package.json
+{
+    "scripts":{
+        "test": "node test for error",
+        "start": "nodemon index.js"
+    }
+}
+
+
+index.js
+*********
+
+const express = require('express');
+const app = express();
+const port = process.env.PORT || '8080';
+
+app.listen(port, ()=>{
+    console.log(`Server Started on port ${port}`);
+})
+
+app.get("/", (req,res)=>{
+    res.write("Hello world");
+    res.end();
+})
+
+MVC Updated Version:-
+**********************
+const http= require('http');
+const server = http.createServer();
+
+const port = process.env.PORT || '8080';
+
+server.listen(port, ()=>{
+    console.log(`Server Started on port ${port}`);
+})
+
+app.js
+******
+
+const express = require('express');
+const app = express();
+
+module.exports = app;
+
+index.js or server.js
+**********************
+const http= require('http');
+const app = require('./app');
+
+const server = http.createServer(app);
+
+const port = process.env.PORT || '8080';
+
+server.listen(port, ()=>{
+    console.log(`Server Started on port ${port}`);
+})
+
+
+
+
+
+
+All EndPoints, in Api and url fro get,post,put,patch,delete are managed by, routes.
+
+by default Route :-
+app.get('/xyz-url', (req,res)=>{
+    res.send('get-url');
+});
+
+app.post('/xyz-url', (req,res)=>{
+    res.send('post-url');
+});
+
+
+Advance Routing :-
+********************
+express has inbuilt router.
+
+routes
+*******
+    crud : studentRoute.js
+    get
+    post
+    put
+    delete
+
+    crud : userRoutes.js
+    get => All user
+    post
+    put
+    delete
+    login => post + get
+    userVerification => user
+    forgetPassword => user
+
+const router = express.Router();
+router.get('/xyz-url', (req,res)=>{
+    res.send('get-url');
+});
+
+router.post('/xyz-url', (req,res)=>{
+    res.send('post-url');
+});
+
+module.export = router;
+
+
+connecting app.js with routes :-
+*********************************
+1. app.js connect with router.
+
+const studentRoute = require('./studentRoute');
+const userRoute = require('./userRoute');
+
+app.use('/student',studentRoute);
+app.use('/users',userRoute);
+
+
+consider the code of routes
+
+Before controller :-
+
+router.post('')
+
+connect With Route
+
+
+control flow of Express Application or lifecycle of Node express :-
+**********************************************************************
+
+npm ---> package.json ---> start ----> nodemon(not required in live server) -------> index.js
+index.js ---> config ----> app.js ----> use middleware ------> router -----> controller
