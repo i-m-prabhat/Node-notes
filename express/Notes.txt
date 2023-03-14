@@ -263,17 +263,56 @@ app.use('/student',studentRoute);
 app.use('/users',userRoute);
 
 
-consider the code of routes
-
-Before controller :-
-
-router.post('')
-
-connect With Route
-
-
-control flow of Express Application or lifecycle of Node express :-
-**********************************************************************
-
-npm ---> package.json ---> start ----> nodemon(not required in live server) -------> index.js
-index.js ---> config ----> app.js ----> use middleware ------> router -----> controller
+Adding Controller to Project:-
+******************************
+	consider the code of routes 
+	
+	Before controller :-
+	
+	router.post('/xyz-url',(req,res,next)=>{
+	 res.send('post url');
+	});
+	
+	After controller :-
+	
+	StudentController.js 
+	//class level code 
+	or 
+	//function level        (next middleware or next closure can be used as callback)
+	                            |
+								|
+	const Student = {
+	getStudent: function(req,res,next){  
+	  //logic
+	}
+	
+	CreateStudent:function(req,res,next){
+		//logic
+	}
+	
+	UpdateStudent:function(req,res,next){
+		//logic
+	}
+	
+	DeleteStudent:function(req,res,next){
+		//logic
+	}
+	
+	}
+	
+	module.export = Student;
+	
+	connect with Route with controller:-
+	*************************************
+	const StudentController = require('./StudentController');
+	
+	router.get('/student-list',StudentController.getStudent);
+	router.post('/register',StudentController.createStudent);
+	router.put('/change-profile',StudentController.UpdateStudent);
+	router.delete('/delete-account',StudentController.DeleteStudent);
+	
+	control flow of Express Application  or lifeycle Node express
+	******************************************************************
+	
+	npm ---> package.json ---> start ----> nodemon (not required in live server)---> index.js 
+	index.js---> config ----> app.js ----> use Middleware -----> router -----> controller
