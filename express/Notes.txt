@@ -316,3 +316,116 @@ Adding Controller to Project:-
 	
 	npm ---> package.json ---> start ----> nodemon (not required in live server)---> index.js 
 	index.js---> config ----> app.js ----> use Middleware -----> router -----> controller
+
+    Adding pages to the Node Application :-
+    *****************************************
+    till now we are able to create, index,app,routes and controller in the Node Application.
+
+    But our Node Application may require static pages to be created.
+    for this we can make a pages or static folder in project
+
+    project structure :-
+    *********************
+
+        1. config
+        2. controller
+        3. model 
+        4. views
+        5. public
+        6. routes
+        7. index.js
+        8. package.json
+        9. package-lock.json
+        10. pages <----------------------- This is pages folder (or static)
+                | ------------> index.html
+                | ------------> about.html
+                | ------------> contact.html
+                | ------------> register.html
+                    ......
+                    .....n 
+                    here we can make static folder name also.
+                    Note :: All the pages will be loaded in GET Request.
+
+    How to load pages in Node Js :-
+    *********************************
+    const path = require('path');
+
+    router.get("/home",(req,res,next)=>{
+        let home_page = path.join(__dirname, "./pages/home.html")
+        res.sendFile(home_page)
+    })
+
+    Sending 404 Page
+    *****************
+    fallback : fallback when responce is ended without, expectation.
+    error.html
+    or
+    404.html
+
+        <h1>404 page Not Found</h1>
+
+        app.use('*',function(req,res,next){
+
+            let pagename = path.join(__dirname, "./pages/404.html")
+            res.sendFile(pagename)
+        })
+
+    Adding controller to the Application :-
+    ****************************************
+    controller :- It seperated Business logic from the Application.
+    it acts as middle man, B/w Model and View.
+    Controller takes the data from model and return to view.
+    and vice-versa.
+
+    three ways of writing the controller
+    1. Normal Functions or Anonymous function to reference.
+    2. Factory Function or Factory Object.(Function as Object)
+    3. using classes or TypeScript.
+
+    Normal Function as a controller :-
+    *************************************
+
+    router,get('/home',HomeController.create());
+                            |
+                            |
+                            |
+                        import/require
+                            |
+                            |---->package.json ---> "type":"module" or rename : .js to .mjs
+                            |
+                            |
+                            |------> require ---> const HomeController = require('../Controller/HomeController')
+                            |
+                            |
+                            |
+                            module.exports = create;
+
+    function create(req,res,next){
+        // business logic
+    }
+
+2. Factory Function :-
+
+const Student :{
+    create: (req,res,next)=>{
+        // logic
+
+        next()
+    }
+    update: (req,res,next)=>{
+        // logic
+
+        next()
+    }
+    delete: (req,res,next)=>{
+        // logic
+        
+        next()
+    }
+}
+
+How to call:-
+Student.create();
+
+How to export :-
+module.exports = Student;
