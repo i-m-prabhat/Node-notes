@@ -429,3 +429,65 @@ Student.create();
 
 How to export :-
 module.exports = Student;
+
+
+3. Using Class controller 
+**************************
+class StudentController
+{
+    constructor(){}
+
+    home(req, res, next)
+    {
+        // logic
+    }
+
+    create(req, res, next)
+    {
+        // logic
+
+    }
+    show(req, res, next)
+    {
+        // logic
+
+    }
+}
+
+How to export:-
+module.exports = StudentController;
+
+How to import and use:-
+const StudentController = require("../controller/StudentController.js");
+
+
+router.get('/', (req, res, next) =>
+{
+    new StudentController().home(req, res, next);
+})
+router.get('/create', (req, res, next) =>
+{
+    new StudentController().create(req, res, next);
+})
+router.get('/show', (req, res, next) =>
+{
+    new StudentController().show(req, res, next)
+})
+
+other ways
+------------
+
+const student = new StudentController();
+
+router.get('/', (req, res, next) =>
+{
+    student.home(req, res, next);
+})
+router.get('/create', (req, res, next) =>
+{
+    student.create(req, res, next);
+})
+router.get('/show', (req, res, next) =>
+{
+    student.show(req, res, next)
+})
