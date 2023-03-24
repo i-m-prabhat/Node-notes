@@ -430,7 +430,6 @@ Student.create();
 How to export :-
 module.exports = Student;
 
-
 3. Using Class controller 
 **************************
 class StudentController

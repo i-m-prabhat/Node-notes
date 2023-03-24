@@ -1,0 +1,16 @@
+{
+  "name": "crud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "insert.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "mongoose":"5.10.11",
+    "express":"latest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

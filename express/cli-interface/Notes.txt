@@ -1,0 +1,40 @@
+You can use Dynamic Input in Node Js :-
+****************************************
+In c language we have scanf function to accept input from user.
+In Java language we have Scanner Class to accept Input from user. (System.in)
+In Python we have input() function accept in input.
+
+similarly, we can use cli interface or user to accept the code from html pages using Node Js.
+
+Two ways to accept the Dynamic Input:-
+***************************************
+client : cli => Known
+client : web => Known
+
+How to accept input from command Line :-
+we have two package:-
+1. readline() package standard.
+2. inquirer package.
+
+readline : package is standard package for accept inputs.
+
+step-1 : require readline package
+        const readline = require('readline')
+
+step-2 : createInterface for the command Line
+        1. Input 
+        2. output
+
+process.env => standard Environment Variable.
+process.env => standard input.
+process.stdout => standard Output.
+
+readline.createInterface({
+    input : process.stdin,
+    output : process.stdout,
+});
+
+readline.question("Enter Your Product Name:",(name)=>{
+    console.log('Your name is '+ name);
+    readline.close();
+});

@@ -270,7 +270,7 @@ import React,{useState,useMemo} from "react";
 
 function App(){
     const [add, setAdd] = useState(0);
-    conat [minus, setMinus] = useState(100);
+    const [minus, setMinus] = useState(100);
 
     const multiply = useMemo(()=>{
         console.log("***************");
