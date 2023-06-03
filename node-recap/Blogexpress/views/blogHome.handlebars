@@ -1,0 +1,7 @@
+<div class="container">
+    {{#each blogs}}
+    <div class="blog">
+        <a href="/blogpost/{{this.slug}}" target="_blank" rel="noopener noreferrer">{{this.title}}</a>
+    </div>
+    {{/each}}
+</div>
