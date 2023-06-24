@@ -1,11 +1,15 @@
 const express = require("express");
 const bodyParser = require('body-parser');
+const env = require('dotenv');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const refreshTokenSecret = '#$fvbhjnb#$fvBBb4567FVB';
+
+env.config();
+const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET;
+const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET;
+const port = process.env.PORT;
 let refreshTokens = [];
 const app = express();
-const port = 5000;
 let connection = require('./database');
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -137,7 +141,7 @@ app.post('/login', async (req, res) =>
                 }
 
 
-                const token = jwt.sign({ id: user.id }, 'your_jwt_secret', { expiresIn: '1h' });
+                const token = jwt.sign({ id: user.id }, accessTokenSecret, { expiresIn: '1h' });
                 const refreshToken = jwt.sign({ id: user.id }, refreshTokenSecret);
 
                 refreshTokens.push(refreshToken);
@@ -145,7 +149,7 @@ app.post('/login', async (req, res) =>
                 return res.status(200).json({
                     code: 200,
                     status: true,
-                    message: 'Login successful',
+                    message: `Hi ${user.name}, You are Login Successfully`,
                     error: false,
                     token: token,
                     refreshToken: refreshToken
@@ -211,7 +215,7 @@ app.post('/refresh-token', (req, res) =>
             });
         }
 
-        const newToken = jwt.sign({ id: decoded.id }, 'your_jwt_secret', { expiresIn: '1h' });
+        const newToken = jwt.sign({ id: decoded.id }, accessTokenSecret, { expiresIn: '1h' });
         return res.status(200).json({
             code: 200,
             status: true,
@@ -245,6 +249,53 @@ app.get('/users', (req, res) =>
             message: 'Users fetched successfully',
             users: results
         });
+    });
+});
+
+
+
+
+// Middleware to verify the access token
+function verifyAccessToken(req, res, next)
+{
+    const token = req.headers.authorization;
+
+    if (!token)
+    {
+        return res.status(401).json({
+            code: 401,
+            status: false,
+            message: 'Access token not provided',
+            error: false
+        });
+    }
+
+    try
+    {
+        const decoded = jwt.verify(token, accessTokenSecret);
+
+        req.user = decoded;
+
+        next();
+    } catch (err)
+    {
+        return res.status(403).json({
+            code: 403,
+            status: false,
+            message: 'Invalid access token',
+            error: err
+        });
+    }
+}
+
+// Protected route
+app.get('/protected-route', verifyAccessToken, (req, res) =>
+{
+    return res.status(200).json({
+        code: 200,
+        status: true,
+        message: 'Access granted to protected route',
+        user: req.user
     });
 });
 
