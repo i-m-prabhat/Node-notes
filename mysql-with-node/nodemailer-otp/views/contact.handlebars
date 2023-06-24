@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Sign-up form</title>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+            integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css" />
+        <link rel="stylesheet" href="../public/css/style.css">
+    </head>
+
+    <body>
+        <div class="container">
+            <h1 class="brand"><span>Welcome User </span> Sign-up</h1>
+            <div class="wrapper animated bounceInLeft">
+                <div class="company-info">
+                    <h3>Panda Enterprises</h3>
+                    <ul>
+                        <li><i class="fa fa-road"></i>Your address</li>
+                        <li><i class="fa fa-phone"></i> (+91) **********</li>
+                        <li><i class="fa fa-envelope"></i>Your website</li>
+                    </ul>
+                </div>
+                <div class="contact">
+                    <h3>Email Us</h3>
+                    <form method="POST" action="send">
+                        <p>
+                            <label>Firstname</label>
+                            <input type="text" name="firstname" required>
+                        </p>
+                        <p>
+                            <label>Lastname</label>
+                            <input type="text" name="lastname" required>
+                        </p>
+                        <p>
+                            <label>Email Address</label>
+                            <input type="email" name="email" required>
+                        </p>
+                        <p>
+                            <label>Phone Number</label>
+                            <input type="number" name="phone" required>
+                        </p>
+
+                        <p class="full">
+                            <button type="submit">Submit</button>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
