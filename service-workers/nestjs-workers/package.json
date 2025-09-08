@@ -1,0 +1,38 @@
+{
+  "name": "nestjs-workers",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NestJS with Cluster, Worker Threads, and BullMQ",
+  "license": "MIT",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/main.js",
+    "start:dev": "ts-node -r tsconfig-paths/register src/main.ts",
+    "start:watch": "nodemon --watch src --exec \"ts-node -r tsconfig-paths/register src/main.ts\"",
+    "worker": "ts-node -r tsconfig-paths/register src/queue/worker.ts",
+    "worker:build": "node dist/queue/worker.js",
+    "lint": "eslint \"src/**/*.ts\" --fix",
+    "format": "prettier --write \"src/**/*.ts\""
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.1.6",
+    "@nestjs/core": "^11.1.6",
+    "@nestjs/platform-express": "^11.1.6",
+    "bullmq": "^5.58.5",
+    "ioredis": "^5.7.0",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "@typescript-eslint/eslint-plugin": "^8.0.1",
+    "@typescript-eslint/parser": "^8.0.1",
+    "eslint": "^9.10.0",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.3.3",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.5.4"
+  }
+}
