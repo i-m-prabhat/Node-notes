@@ -2,12 +2,17 @@ const checkPermission = () =>
 {
     if (!('serviceWorker' in navigator))
     {
-        throw new Error('Service Worker is not supported in this browser');
+        throw new Error("No support for service worker!")
     }
 
     if (!('Notification' in window))
     {
-        throw new Error('Notification is not supported in this browser');
+        throw new Error("No support for notification API");
+    }
+
+    if (!('PushManager' in window))
+    {
+        throw new Error("No support for Push API")
     }
 }
 
@@ -20,19 +25,17 @@ const registerSW = async () =>
 const requestNotificationPermission = async () =>
 {
     const permission = await Notification.requestPermission();
+
     if (permission !== 'granted')
     {
-        throw new Error('Permission not granted for Notification');
+        throw new Error("Notification permission not granted")
     }
+
 }
 
 const main = async () =>
 {
-    checkPermission();
-    const reg = await registerSW();
-    reg.showNotification('Hello world!');
-    // requestNotificationPermission();
+    checkPermission()
+    await requestNotificationPermission()
+    await registerSW()
 }
-
-
-main();
