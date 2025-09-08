@@ -1,0 +1,16 @@
+{
+  "name": "express-workers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bullmq": "^5.58.5",
+    "express": "^5.1.0",
+    "ioredis": "^5.7.0"
+  }
+}
